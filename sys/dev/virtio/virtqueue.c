@@ -418,14 +418,14 @@ virtqueue_nfree(struct virtqueue *vq)
 	return (vq->vq_free_cnt);
 }
 
-int
+bool
 virtqueue_empty(struct virtqueue *vq)
 {
 
 	return (vq->vq_nentries == vq->vq_free_cnt);
 }
 
-int
+bool
 virtqueue_full(struct virtqueue *vq)
 {
 

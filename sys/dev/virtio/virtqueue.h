@@ -29,6 +29,8 @@
 #ifndef _VIRTIO_VIRTQUEUE_H
 #define _VIRTIO_VIRTQUEUE_H
 
+#include <stdbool.h>
+
 struct virtqueue;
 struct sglist;
 
@@ -85,8 +87,8 @@ vm_paddr_t virtqueue_avail_paddr(struct virtqueue *vq);
 vm_paddr_t virtqueue_used_paddr(struct virtqueue *vq);
 
 uint16_t virtqueue_index(struct virtqueue *vq);
-int	 virtqueue_full(struct virtqueue *vq);
-int	 virtqueue_empty(struct virtqueue *vq);
+bool	 virtqueue_full(struct virtqueue *vq);
+bool	 virtqueue_empty(struct virtqueue *vq);
 int	 virtqueue_size(struct virtqueue *vq);
 int	 virtqueue_nfree(struct virtqueue *vq);
 int	 virtqueue_nused(struct virtqueue *vq);
