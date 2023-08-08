@@ -1,0 +1,53 @@
+.\"
+.\" SPDX-License-Identifier: BSD-2-Clause
+.\"
+.\" Copyright (c) 2023 The FreeBSD Foundation
+.\"
+.\" This manual page was written by Mina Galić <FreeBSD@igalic.co> under
+.\" sponsorship from the FreeBSD Foundation.
+.\"
+.Dd August 8, 2023
+.Dt VIRTIO 9
+.Os
+.Sh NAME
+.Nm virtio
+.Nd "introduction to virtio kernel programming interfaces"
+.Sh DESCRIPTION
+This subsystem defines a number of APIs to write a
+.Xr virtio 4
+.Xr device 9
+.Xr driver 9 .
+The
+.Xr VIRTIO_DRIVER 9
+wrappers abstract that process a great deal and cut down on boilerplate code.
+.Pp
+Perhaps the most important APIs are the ones for talking to the
+.Xr virtqueue 9 .
+.Pp
+APIs for interacting with
+.Xr pci 9
+and
+.Xr mmio 9
+buses can be found in
+.Xr virtio_pci 9
+and
+.Xr virtio_mmio 9
+respectively.
+.Pp
+Finally, there are the
+.Xr virtio_endian 9
+helper functions to convert between Guest's (driver's) and the Host's (device's)
+.Xr byteorder 9 .
+.Sh SEE ALSO
+.Xr VIRTIO_DRIVER 9 ,
+.Xr virtio_endian 9 ,
+.Xr virtio_mmio 9 ,
+.Xr virtio_pci 9 ,
+.Xr virtqueue 9
+.Rs
+.%T "Virtual I/O Device (VirtIO) 1.1"
+.%U "https://docs.oasis-open.org/virtio/virtio/v1.1/csprd01/virtio-v1.1-csprd01.html"
+.Re
+.Sh AUTHORS
+This manual page was written by
+.An Mina Galić .
