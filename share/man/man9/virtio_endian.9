@@ -1,0 +1,69 @@
+.\"
+.\" SPDX-License-Identifier: BSD-2-Clause
+.\"
+.\" Copyright (c) 2023 The FreeBSD Foundation
+.\"
+.\" This manual page was written by Mina Galić <FreeBSD@igalic.co> under
+.\" sponsorship from the FreeBSD Foundation.
+.\"
+.Dd August 8, 2023
+.Dt VIRTIO_ENDIAN 9
+.Os
+.Sh NAME
+.Nm virtio_endian
+.Nd "virtio helper functions for byteswapping"
+.Sh SYNOPSIS
+.In dev/virtio/virtio.h
+.Ft uint16_t
+.Fo virtio_htog16
+.Fa "bool modern"
+.Fa "uint16_t val"
+.Fc
+.Ft uint32_t
+.Fo virtio_htog32
+.Fa "bool modern"
+.Fa "uint32_t val"
+.Fc
+.Ft uint64_t
+.Fo virtio_htog64
+.Fa "bool modern"
+.Fa "uint64_t val"
+.Fc
+.Ft uint16_t
+.Fo virtio_gtoh16
+.Fa "bool modern"
+.Fa "uint16_t val"
+.Fc
+.Ft uint32_t
+.Fo virtio_gtoh32
+.Fa "bool modern"
+.Fa "uint32_t val"
+.Fc
+.Ft uint64_t
+.Fo virtio_gtoh64
+.Fa "bool modern"
+.Fa "uint64_t val"
+.Fc
+.Sh DESCRIPTION
+The virtio_htog functions correspond to
+.Xr htole16 9 ,
+.Xr htole32 9 ,
+.Xr htole64 9
+functions, while the virtio_gtoh functions correspond to the
+.Xr le16toh 9 ,
+.Xr le32toh 9 ,
+.Xr le64toh 9
+functions.
+Whether that is the case, or these functions act as pass-thru of the
+.Fa val
+depends on the
+.Fa modern
+parameter.
+.Sh EXAMPLES
+.Bd -literal -offset indent
+uint64_t cid = virtio_htog32(true, 0x2);
+.Sh SEE ALSO
+.Xr byteorder 9 .
+.Sh AUTHORS
+This manual page was written by
+.An Mina Galić .
