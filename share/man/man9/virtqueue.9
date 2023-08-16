@@ -13,8 +13,16 @@
 .Nm virtqueue
 .Nd "functions for accessing and manipulating virtqueues"
 .Sh SYNOPSIS
+.In dev/virtio/virtio.h
 .In dev/virtio/virtqueue.h
 .Ss /* virtqueue allocation functions */
+.Ft int
+.Fo virtio_alloc_virtqueues
+.Fa "device_t dev"
+.Fa "int flags"
+.Fa "int nvqs"
+.Fa "struct vq_alloc_info *info"
+.Fc
 .Ft int
 .Fo virtqueue_alloc
 .Fa "device_t dev"
@@ -134,16 +142,26 @@
 .Sh DESCRIPTION
 The virtqueue functions provide an API into the most important VirtIO abstraction.
 .Pp
-The
+The low-level
 .Fn virtqueue_alloc
 function allocates a virtqueue using
 .Xr malloc 9 ,
-and assigning it the
+and associating it the
 .Xr device 9
 dev.
-Conversely,
+.Pp
+A high-level function which abstracts the binding to the the bus can be found in
+.Fn virtio_alloc_virtqueues .
+This function also has the binding to the device which allows easy access to that device in module functions where that might otherwise not be easily achievable.
+.Pp
 .Fn virtqueue_free
-frees the virtqueue.
+frees the virtqueue, and is called automatically by either the bus, or by theallocation function in case of failure.
+Similarly,
+.Fn virtqueue_reinit
+is a low-level function used by busses to reinitialize the virtqueue when the bus is reinitialized.
+.Pp
+.Fn virtqueue_drain
+drains the queue, and is typically called on detachment of the device.
 .Sh EXAMPLES
 .Bd -literal -offset indent
 uint64_t cid = virtio_htog32(true, 0x2);
