@@ -162,11 +162,27 @@ is a low-level function used by busses to reinitialize the virtqueue when the bu
 .Pp
 .Fn virtqueue_drain
 drains the queue, and is typically called on detachment of the device.
+.Pp
+The virtqueue interrupt functions
+.Fn virtqueue_intr
+and
+.Fn virtqueue_intr_filter
+help attach an interrupt handlers to a virtqueue and can be used for example in
+.Xr bus_setup_intr 9 .
+While
+.Fn virtqueue_disable_intr ,
+.Fn virtqueue_postpone_intr ,
+and
+.Fn virttqueue_enable_intr
+allow finer grained control of what interrupts to process in
+.Xr driver 9
+code, and when.
 .Sh EXAMPLES
 .Bd -literal -offset indent
 uint64_t cid = virtio_htog32(true, 0x2);
 .Sh SEE ALSO
-.Xr sglist 9 .
+.Xr sglist 9 ,
+.Xr BUS_SETUP_INTR 9 .
 .Sh AUTHORS
 This manual page was written by
 .An Mina Galić .
