@@ -190,6 +190,27 @@ ring", respectively, as mapping to the kernel virtual address of their
 underlying structures, as per
 .Xr vtophys 9
 of each platform.
+.Pp
+The
+.Fn virtqueue_full ,
+and
+.Fn virtqueue_empty ,
+functions return a
+.Ft bool
+value whether the virtqueue
+.Fa vq
+is full or empty.
+.Pp
+The
+.Fn virtqueue_index
+function returns the index in the underlying index into the queue.
+.Pp
+The
+.Fn virtqueue_size ,
+.Fn virtqueue_nfree ,
+and
+.Fn virtqueue_nused
+functions return the size, number of free, and number of used elements in the virtqueue.
 .Sh EXAMPLES
 .Bd -literal -offset indent
 uint64_t cid = virtio_htog32(true, 0x2);
