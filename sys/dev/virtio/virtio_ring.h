@@ -88,6 +88,11 @@ struct vring {
 	struct vring_desc *desc;
 	struct vring_avail *avail;
 	struct vring_used *used;
+	/*
+	 * note that these structs have been renamed to virtq_desc, virtq_avail,
+	 * and virtq_used, respecitively, in the 1.0 spec, without impact on
+	 * their function
+	 */
 };
 
 /* Alignment requirements for vring elements.
