@@ -177,12 +177,26 @@ and
 allow finer grained control of what interrupts to process in
 .Xr driver 9
 code, and when.
+.Pp
+The functions
+.Fn virtqueue_paddr ,
+.Fn virtqueue_desc_paddr ,
+.Fn virtqueue_avail_paddr ,
+.Fn virtqueue_used_paddr ,
+return the physical address
+.Ft vm_paddr_t
+of the underlying ring buffer, its description, the "available ring", and "used
+ring", respectively, as mapping to the kernel virtual address of their
+underlying structures, as per
+.Xr vtophys 9
+of each platform.
 .Sh EXAMPLES
 .Bd -literal -offset indent
 uint64_t cid = virtio_htog32(true, 0x2);
 .Sh SEE ALSO
 .Xr sglist 9 ,
-.Xr BUS_SETUP_INTR 9 .
+.Xr BUS_SETUP_INTR 9 ,
+.Xr pmap 9 .
 .Sh AUTHORS
 This manual page was written by
 .An Mina Galić .
