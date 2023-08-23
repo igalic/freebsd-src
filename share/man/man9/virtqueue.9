@@ -210,7 +210,22 @@ The
 .Fn virtqueue_nfree ,
 and
 .Fn virtqueue_nused
-functions return the size, number of free, and number of used elements in the virtqueue.
+functions return the size, number of free, and number of used elements in the
+.Ft virtqueue .
+.Pp
+.Fn virtqueue_notify
+sends a notification to the host system on the
+.Ft virtqueue
+.Fa vq .
+.Pp
+The
+.Fn
+virtqueue_dump
+function is a debug function which dumps the contents of the
+.Ft virtqueue
+.Fa vq
+using
+.Xr printf 9 .
 .Sh EXAMPLES
 .Bd -literal -offset indent
 uint64_t cid = virtio_htog32(true, 0x2);
@@ -221,4 +236,3 @@ uint64_t cid = virtio_htog32(true, 0x2);
 .Sh AUTHORS
 This manual page was written by
 .An Mina Galić .
-
