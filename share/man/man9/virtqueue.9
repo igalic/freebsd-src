@@ -106,10 +106,6 @@
 .Fa "struct virtqueue *vq"
 .Fc
 .Ft void
-.Fo virtqueue_notify
-.Fa "struct virtqueue *vq"
-.Fc
-.Ft void
 .Fo virtqueue_dump
 .Fa "struct virtqueue *vq"
 .Fc
@@ -131,6 +127,10 @@
 .Fo virtqueue_poll
 .Fa "struct virtqueue *vq"
 .Fa "uint32_t *len"
+.Fc
+.Ft void
+.Fo virtqueue_notify
+.Fa "struct virtqueue *vq"
 .Fc
 .Sh DESCRIPTION
 The virtqueue functions provide an API into the most important VirtIO abstraction.
@@ -215,22 +215,39 @@ and
 functions return the size, number of free, and number of used elements in the
 .Ft virtqueue .
 .Pp
-.Fn virtqueue_notify
-sends a notification to the host system on the
-.Ft virtqueue
-.Fa vq .
-.Pp
-The
+The most generic and least useful information function in this group is is the
+debugging function
 .Fn
 virtqueue_dump
-function is a debug function which dumps the contents of the
+which dumps the contents of the
 .Ft virtqueue
 .Fa vq
 using
 .Xr printf 9 .
+.Pp
+The function
+.Fn virtqueue_enqueue
+is used to send data between the guest and the host via the
+.Ft virtqueue
+.Fa vq .
+Facilitating this exchange,
+.Fn virtqueue_enqueue
+uses the intergers
+.Fa readable
+and
+.Fa writable
+to tell how much data…
+.Fn virtqueue_enqueue
+returns 0 on success, or else an error.
+.Pp
+Finally, the
+.Fn virtqueue_notify
+function sends a notification to the host system that data has been enqueued or
+dequeued on the
+.Ft virtqueue
+.Fa vq .
 .Sh EXAMPLES
-.Bd -literal -offset indent
-uint64_t cid = virtio_htog32(true, 0x2);
+.Ss TODO
 .Sh SEE ALSO
 .Xr sglist 9 ,
 .Xr BUS_SETUP_INTR 9 ,
